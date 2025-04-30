@@ -1,0 +1,22 @@
+{%extends 'shop/base.html'%}
+{%block body%}
+ 
+<div class="container">
+    <h2 style="color:#631903">CURIO'S  Cabinet! </h2>
+     <div class="row">
+         {% for userdata in data %}
+         <div class="col-md-4 mt-4">
+             <div class="card" style="border:2px solid #6A2A17">
+                 <img src="{{userdata.image.url }}" alt="card-img-top" >
+                 <div class="card-body">
+                     <div id="nm{{ prod.id }}" class="card-title h1" style="color:#6A2A17">{{ userdata.desc }}</div>
+                     
+                    </div>
+             </div>
+           
+            </div>
+            {%endfor%}
+    </div>
+    </div>
+
+{%endblock%}

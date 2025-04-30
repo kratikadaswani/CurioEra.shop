@@ -1,0 +1,101 @@
+{% extends 'shop/base.html' %}
+{%load static%}
+     
+     {%block body%}
+     <div class="container">
+        <h2 style="color:#631903">CURIO'S  VINTAGE COLLECTION! </h2>
+         <div class="row">
+             {% for prod in products %}
+             <div class="col-md-3 mt-4">
+                 <div class="card" style="border:2px solid #6A2A17">
+                     <img src="{{prod.image.url }}" alt="card-img-top" >
+                     <div class="card-body">
+                         <div id="nm{{ prod.id }}" class="card-title h1" style="color:#6A2A17">{{ prod.title }}</div>
+                         <!-- <span id="price{{ prod.id }}" class="card-text" style="color:#e5c793"><s>{{ prod.price }}  </s></span> -->
+                         
+                         <span  class="card-text ml-2" style="color:#e5c793"> <s> {{ prod.price }} </s></span>
+                         <span id="price{{ prod.id }}" class="card-text" style="font-size: 20px; color:#8d1919">{{ prod.discounted_price }} </span>
+                        </div>
+                 </div>
+               <div style="text-align: center;"> <a class="btn-success mt-2" href="{% url 'shop:detail' prod.id %}"  style="background-color: #6A2A17; color:#e5c793; padding:4px">view</a>
+                 <button id="{{ prod.id }}" class="atc btn btn-warning mt-2" style="background-color: #f1cd8e; color:#6A2A17; ">Add to cart</button>
+                </div> 
+                </div>
+             {% endfor %}
+         </div>
+     </div>
+     {%endblock%}
+{% block scripts %} 
+<script type="text/javascript">
+    if(localStorage.getItem('cart')==null){
+        var cart={};
+    }
+    else{
+        cart=JSON.parse(localStorage.getItem('cart'));
+    }
+    $(document).on('click','.atc',function(){
+        // console.log('working');
+       
+        // var item=this.id.toString();
+        // if(cart[item]==undefined){
+        //     cart[item]=1;
+        // }
+        var item = this.id.toString();
+
+      if (cart[item] == undefined) {
+        quantity = 1;
+        name = document.getElementById("nm" + item).textContent;
+        let priceElement = document.getElementById("price" + item);
+        if (!priceElement) {
+            console.error("Price element not found for item:", item);
+            return; // stop execution if not found
+        }
+        console.error(priceElement);
+        let price = parseFloat(priceElement.textContent);
+
+        cart[item] = [quantity, name, price];
+        } 
+      else {
+        quantity = cart[item][0] + 1;
+        cart[item][0] = quantity;
+        price = parseFloat(document.getElementById("price" + item).textContent);
+        cart[item][2] += price;
+        }
+
+        // console.log(cart);
+        localStorage.setItem('cart',JSON.stringify(cart));
+        document.getElementById("cart1").innerHTML='Cart('+Object.keys(cart).length+')';
+        // 'Cart('+Objects.keys(cart).length+')';/
+        console.log(Object.keys(cart).length);
+
+        
+    });
+    
+    if(localStorage.getItem('cart')!=null){
+         display_popover(cart);
+    }
+   function display_popover(cart){
+    
+    var cartstr="<h5><u> this is your cart </u></h5>";
+    var cnt=1;
+
+    for (var x in cart){
+        var itemElement = document.getElementById('nm' + x);
+        var itemName = document.getElementById('nm' + x);
+        if (itemElement) {
+        // cartstr += cnt + '. ' + itemElement.innerHTML + " qty:" + cart[x][0] + "</br>";
+        cartstr += cnt + '. ' + cart[x][1] + " qty: " + cart[x][0] + "<br>";
+
+        cnt++;
+    }
+
+    }
+    cartstr+= "<a href='/checkout'><button class='btn btn-secondary' id='checkout' >Checkout</button></a>";
+    console.log(cartstr);
+
+   document.getElementById("cart1").setAttribute('data-content',cartstr);
+   $('[data-toggle="popover"]').popover();
+
+}
+</script>
+{% endblock %}

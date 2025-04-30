@@ -1,0 +1,209 @@
+
+*{
+  margin:0px;
+  padding: 0px;
+  box-sizing: border-box;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    box-sizing: border-box;
+  }
+  
+body {
+   
+  min-height: 100vh;
+  background: linear-gradient(135deg, 
+    #5d3c1c, #927839, #eb731d, #e4be83)
+    no-repeat center center fixed;
+  background-size: cover;;
+  /* background-size: 400% 400%; */
+  animation: bgMove 20s ease infinite;
+  
+  /* background-repeat: no-repeat; 
+  background-size: cover;
+  background-position: center; */
+  
+  }
+ 
+.container{
+  min-height: 100vh;
+}
+.main{
+    /* background-color: #0d0a0a; */
+    position: relative;
+    z-index: 10;
+}
+.page1{
+    height: 100vh;
+    width: 100%;
+    background-color: #f4f1de;
+    position: relative;
+    padding: 0 3vw;
+}
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 999;
+}
+.promo-section {
+  margin-top: 0;
+}
+.carousel-inner img {
+  display: block;
+  width: 100%;
+  margin: 0;
+}
+.cover-container {
+  padding-top: 0 !important;
+}
+  @keyframes gradientAnimation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }  
+  .card{
+    background-color: transparent;
+  }
+.card-title{
+    font-size: 2em;
+}
+.card-text{
+    font-weight: 800;
+    color: green;
+    background-color: transparent;
+}
+.card-body {
+  text-align: center;
+  background-color: transparent;
+}
+.card-body a{
+  color:#6A2A17
+}
+.card-img-top {
+  width: 100%;
+  height: auto;
+  display: block;
+  
+}
+div.col{
+    margin-right: 0;
+}
+.navbar-expand-lg a{
+    color: #e5c793;
+    font-size: 20px;
+}
+.navbar-expand-lg button{
+    color: #e5c793;
+    background-color: #6A2A17;
+}
+#form{
+    background-color: #e5c793;
+    color: #6A2A17;
+}
+.video-hero {
+  position: relative;
+  overflow: hidden;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  
+  z-index: -1;
+}
+
+.hero-content {
+  position: relative;
+  text-align: center;
+  color: #e5c793;
+}
+
+.hero-content h1 {
+  font-size: 4rem;
+  text-shadow: 2px 2px #000;
+  margin-bottom: 20px;
+}
+
+.hero-content .brand-name {
+  color: #6A2A17; /* neon pink or retro purple */
+}
+
+.hero-content p {
+  font-size: 1.5rem;
+  margin-bottom: 30px;
+}
+
+.hero-content .btn {
+  padding: 12px 30px;
+  font-size: 1.2rem;
+  border-radius: 30px;
+  background-color: #6A2A17;
+  border: none;
+  color: #e5c793;
+  text-transform: uppercase;
+}
+.left img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.swiper {
+  width: 100%;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+.swiper-slide {
+  background-position: center;
+  background-size: cover;
+  width: 400px;
+  height:400px;
+}
+
+.swiper-slide img {
+  display: block;
+ width: 100%
+}
+.swiper{
+  margin-bottom: 10px;
+}
+.head h1{
+  color: #6A2A17;
+  
+}
+.image-container {
+  position: relative;
+  display: inline-block;
+}
+
+.image-container img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.overlay-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.5); /* optional: makes text readable */
+  padding: 20px;
+  border-radius: 8px;
+}
+.inp{
+  background-color: #6A2A17;
+  color: #f4f1de;
+}
