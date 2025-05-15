@@ -106,12 +106,14 @@ header {
   color: #6A2A17
 }
 
-.card-img-top {
-  width: 100%;
-  height: auto;
-  display: block;
 
+.card {
+  width: 100%;
+  height: 120px; /* or whatever you like */
+  object-fit: cover;
+ 
 }
+
 
 div.col {
   margin-right: 0;
@@ -242,4 +244,157 @@ div.col {
 .inp {
   background-color: #6A2A17;
   color: #f4f1de;
+}
+/* Base mobile adjustments (up to 576px) */
+@media (max-width: 576px) {
+
+  .hero-content h1 {
+    font-size: 2rem;
+  }
+
+  .hero-content p {
+    font-size: 1rem;
+  }
+
+  .hero-content .btn {
+    padding: 8px 20px;
+    font-size: 1rem;
+  }
+
+  .navbar-expand-lg a {
+    font-size: 16px;
+  }
+
+  .carousel-caption h1 {
+    font-size: 1.5rem;
+  }
+
+  .carousel-caption h3, .carousel-caption h4 {
+    font-size: 1rem;
+  }
+
+  .col-md-3, .col-md-6, .col-md-12 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+
+  .card-title {
+    font-size: 1.5rem;
+  }
+
+  .card-body {
+    padding: 10px;
+  }
+
+  .swiper-slide {
+    width: 300px;
+    height: 300px;
+  }
+
+  .hero-content {
+    padding: 0 15px;
+  }
+}
+
+/* Small tablets (up to 768px) */
+@media (max-width: 768px) {
+
+  .hero-content h1 {
+    font-size: 2.5rem;
+  }
+
+  .hero-content p {
+    font-size: 1.2rem;
+  }
+
+  .navbar-expand-lg a {
+    font-size: 18px;
+  }
+
+  .swiper-slide {
+    width: 350px;
+    height: 350px;
+  }
+
+  .carousel-caption h1 {
+    font-size: 2rem;
+  }
+
+  .carousel-caption h3, .carousel-caption h4 {
+    font-size: 1.2rem;
+  }
+
+  .col-md-3 {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+
+  .card-title {
+    font-size: 1.7rem;
+  }
+}
+
+/* Medium devices (up to 992px) */
+@media (max-width: 992px) {
+  .hero-content h1 {
+    font-size: 3rem;
+  }
+
+  .navbar-expand-lg a {
+    font-size: 19px;
+  }
+
+  .carousel-caption h1 {
+    font-size: 2.5rem;
+  }
+
+  .carousel-caption h3, .carousel-caption h4 {
+    font-size: 1.3rem;
+  }
+
+  .col-md-3 {
+    flex: 0 0 33.3333%;
+    max-width: 33.3333%;
+  }
+
+  .swiper-slide {
+    width: 380px;
+    height: 380px;
+  }
+}
+
+/* Large devices (up to 1200px) */
+@media (max-width: 1200px) {
+  .hero-content h1 {
+    font-size: 3.5rem;
+  }
+
+  .hero-content p {
+    font-size: 1.4rem;
+  }
+
+  .swiper-slide {
+    width: 390px;
+    height: 390px;
+  }
+}
+@media (max-width: 767px) {
+  .custom-col {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+}
+
+@media (max-width: 467px) {
+  .custom-col {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+}
+/* ---invoice---  */
+
+.fl{
+  display: flex;
+  justify-content: space-between;
+  border: 2px solid black;
 }

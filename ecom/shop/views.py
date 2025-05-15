@@ -2,6 +2,14 @@ from django.shortcuts import render, redirect
 from .models import Products,Order
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
+import pdfkit
+from django.http import HttpResponse
+from django.template import loader
+import io
+import json
+from datetime import datetime
+
+
 
 @login_required(login_url='home:login_page')
 
@@ -42,5 +50,32 @@ def checkout(request):
 
         order=Order(items=items,name=name,email=email, address=address,city=city,state=state,zipcode=zipcode,total=total)
         order.save()
+        items_dict = json.loads(items)
+         
+
+        current_datetime = datetime.now().strftime('%B %d, %Y %I:%M %p')  # example: May 14, 2025 09:27 PM
+
+        # Load template
+        template = loader.get_template('shop/invoice.html')
+
+        # Render template to HTML
+        html = template.render({
+            'order': order,
+            'items': items_dict,
+            'current_date': current_datetime
+            })
+        options={
+            'page-size':'letter',
+            'encoding':'UTF-8',
+             'enable-local-file-access': None,
+        }
+        # Generate PDF
+        pdf=pdfkit.from_string(html,False,options)
+        response = HttpResponse(pdf,content_type='application/pdf')
+        response['Content-Disposition'] = f'attachment; filename="Invoice_{order.id}.pdf"'
+        
+
+        return response
+
     return render(request,'shop/checkout.html')
 

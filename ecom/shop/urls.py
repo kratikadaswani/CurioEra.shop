@@ -8,5 +8,5 @@ urlpatterns = [
     path('',views1.index,name='index'),
     
     path('detail/<int:id>/',views1.details,name='detail'),
-    path('checkout/',views1.checkout, name='checkout'),
+    path('shop/checkout/',views1.checkout, name='checkout'),
 ]

@@ -6,9 +6,10 @@
         <h2 style="color:#631903">CURIO'S  VINTAGE COLLECTION! </h2>
          <div class="row">
              {% for prod in products %}
-             <div class="col-md-3 mt-4">
-                 <div class="card" style="border:2px solid #6A2A17">
-                     <img src="{{prod.image.url }}" alt="card-img-top" >
+             <div class="col-12 col-sm-6 col-md-4 col-lg-4 mt-4 ">
+  <!-- your card here -->
+                  <div class="card flex-fill" style="border:2px solid #6A2A17">
+                     <img src="{{prod.image.url }}" alt="card-img-top" class="img">
                      <div class="card-body">
                          <div id="nm{{ prod.id }}" class="card-title h1" style="color:#6A2A17">{{ prod.title }}</div>
                          <!-- <span id="price{{ prod.id }}" class="card-text" style="color:#e5c793"><s>{{ prod.price }}  </s></span> -->
@@ -28,6 +29,7 @@
 {% block scripts %} 
 <script type="text/javascript">
     if(localStorage.getItem('cart')==null){
+         localStorage.setItem('cart', JSON.stringify({}));
         var cart={};
     }
     else{
@@ -71,8 +73,8 @@
         
     });
     
-    if(localStorage.getItem('cart')!=null){
-         display_popover(cart);
+    if (localStorage.getItem('cart') != null ) {
+    display_popover(cart);
     }
    function display_popover(cart){
     
@@ -90,12 +92,21 @@
     }
 
     }
-    cartstr+= "<a href='/checkout'><button class='btn btn-secondary' id='checkout' >Checkout</button></a>";
+    cartstr+= "<a href='{%url 'shop:checkout'%}'><button class='btn btn-secondary' id='checkout' >Checkout</button></a>";
+    cartstr += "<button class='btn btn-danger' id='clearCart'>Clear Cart</button>";
     console.log(cartstr);
 
    document.getElementById("cart1").setAttribute('data-content',cartstr);
    $('[data-toggle="popover"]').popover();
 
 }
+$(document).on('click', '#clearCart', function(){
+    localStorage.setItem('cart', JSON.stringify({})); // empty the cart
+    document.getElementById("cart1").innerHTML = 'Cart(0)'; // reset cart count
+    $('[data-toggle="popover"]').popover('hide'); // close the popover if open
+    location.reload(); // optionally refresh the page to update the display
+});
+
+
 </script>
 {% endblock %}
