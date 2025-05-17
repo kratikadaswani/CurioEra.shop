@@ -8,6 +8,7 @@ This web application lets users:
 - View product details, add to cart, and checkout
 - Experience a classic '90s showcase vibe digitally
 - Download the corresponding invoice after checkout
+- Interactive chatbot feature for any customer queries
   
 Tech Stack-
 Backend- Python 3.11+, Django 4.x
