@@ -7,6 +7,7 @@ This web application lets users:
 - Participate in a poll for preferred products and could upload their aesthetic vintage image and memory to get featured
 - View product details, add to cart, and checkout
 - Experience a classic '90s showcase vibe digitally
+- Download the corresponding invoice after checkout
   
 Tech Stack-
 Backend- Python 3.11+, Django 4.x
