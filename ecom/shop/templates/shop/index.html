@@ -2,29 +2,31 @@
 {%load static%}
      
      {%block body%}
-     <div class="container">
-        <h2 style="color:#631903">CURIO'S  VINTAGE COLLECTION! </h2>
-         <div class="row">
-             {% for prod in products %}
-             <div class="col-12 col-sm-6 col-md-4 col-lg-4 mt-4 ">
-  <!-- your card here -->
-                  <div class="card flex-fill" style="border:2px solid #6A2A17">
-                     <img src="{{prod.image.url }}" alt="card-img-top" class="img">
-                     <div class="card-body">
-                         <div id="nm{{ prod.id }}" class="card-title h1" style="color:#6A2A17">{{ prod.title }}</div>
-                         <!-- <span id="price{{ prod.id }}" class="card-text" style="color:#e5c793"><s>{{ prod.price }}  </s></span> -->
-                         
-                         <span  class="card-text ml-2" style="color:#e5c793"> <s> {{ prod.price }} </s></span>
-                         <span id="price{{ prod.id }}" class="card-text" style="font-size: 20px; color:#8d1919">{{ prod.discounted_price }} </span>
-                        </div>
-                 </div>
-               <div style="text-align: center;"> <a class="btn-success mt-2" href="{% url 'shop:detail' prod.id %}"  style="background-color: #6A2A17; color:#e5c793; padding:4px">view</a>
-                 <button id="{{ prod.id }}" class="atc btn btn-warning mt-2" style="background-color: #f1cd8e; color:#6A2A17; ">Add to cart</button>
-                </div> 
-                </div>
-             {% endfor %}
-         </div>
-     </div>
+    <div class="container">
+  <h2 style="color:#631903">CURIO'S  VINTAGE COLLECTION!</h2>
+  <div class="row">
+ <!-- moved here -->
+    {% for prod in products %}
+      <div class="col-md-4">
+      <div class="product-card" style="border:2px solid #6A2A17">
+        <img src="{{prod.image.url}}" class="card-img-top" height=300px width=auto>
+        <div class="card-body">
+          <div id="nm{{ prod.id }}" class="card-title h1" style="color:#6A2A17">{{ prod.title }}</div>
+          <span class="card-text ml-2" style="color:#e5c793"><s>{{ prod.price }}</s></span>
+          <span id="price{{ prod.id }}" class="card-text" style="font-size: 20px; color:#8d1919">{{ prod.discounted_price }}</span>
+        </div>
+        <div style="text-align: center;">
+          <a class="btn-success mt-2" href="{% url 'shop:detail' prod.id %}" style="background-color: #6A2A17; color:#e5c793; padding:4px">view</a>
+          <button id="{{ prod.id }}" class="atc btn btn-warning mt-2" style="background-color: #f1cd8e; color:#6A2A17;">Add to cart</button>
+        </div>
+      </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+
+     
      {%endblock%}
 {% block scripts %} 
 <script type="text/javascript">
@@ -108,5 +110,8 @@ $(document).on('click', '#clearCart', function(){
 });
 
 
+</script>
+<script>
+(function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="P4_Ns6b4U33m6JltF_y7-";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
 </script>
 {% endblock %}

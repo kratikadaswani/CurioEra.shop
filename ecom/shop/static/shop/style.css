@@ -107,15 +107,42 @@ header {
 }
 
 
-.card {
+/* .card {
   width: 100%;
-  height: 120px; /* or whatever you like */
+  height: 120px;
   object-fit: cover;
  
+} */
+.card img {
+   
+   /* or whatever you like */
+  object-fit: cover;
+}
+/* .product-card {
+  background: #fff8e7;
+  padding: 10px;
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.product-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+} */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 20px;
 }
 
 
-div.col {
+div .col {
   margin-right: 0;
 }
 
@@ -352,10 +379,10 @@ div.col {
     font-size: 1.3rem;
   }
 
-  .col-md-3 {
+  /* .col-md-3 {
     flex: 0 0 33.3333%;
     max-width: 33.3333%;
-  }
+  } */
 
   .swiper-slide {
     width: 380px;
