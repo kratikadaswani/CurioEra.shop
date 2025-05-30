@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>home page</title>
+    <title>CurioEra</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
    
@@ -21,7 +21,10 @@
                 <img src="/media/imgs/logo.png" height=80px width=auto alt="Logo">
 
                 <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                  <span class="navbar-toggler-icon " style="color: antiquewhite;"></span>
+                  <span class="bi bi-arrow-bar-down"></span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-bar-down" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M1 3.5a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13a.5.5 0 0 1-.5-.5M8 6a.5.5 0 0 1 .5.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 0 1 .708-.708L7.5 12.293V6.5A.5.5 0 0 1 8 6"/>
+</svg>
                 </button>
               
                 <div class="ml-4 collapse navbar-collapse" id="navbarSupportedContent">
@@ -41,15 +44,15 @@
                         Category
                       </a>
                       <div class="dropdown-menu">
-                        <a class="dropdown-item" href="?category=Electronics">Electronics</a>
-                        <a class="dropdown-item" href="?category=Accessories">Accessories</a>
-                        <a class="dropdown-item" href="?category=Sports">Sports</a>
-                        <a class="dropdown-item" href="?category=Home Decor">Home Decor</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="{% url 'shop:index'%}">Show All</a>
+                        <a class="dropdown-item" href="{% url 'shop:index' %}?category=Electronics">Electronics</a>
+                        <a class="dropdown-item" href="{% url 'shop:index' %}?category=Accessories">Accessories</a>
+                        <a class="dropdown-item" href="{% url 'shop:index' %}?category=Sports">Sports</a>
+                        <a class="dropdown-item" href="{% url 'shop:index' %}?category=Home Decor">Home Decor</a>
                       </div>
                     </li>
-                    
+                    <li class="nav-item active">
+                      <a class="nav-link" href="{%url 'home:collaboration'%}">Collaboration <span class="sr-only">(current)</span></a>
+                    </li>
                     
                   </ul>
                   

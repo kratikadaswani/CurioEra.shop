@@ -1,22 +1,156 @@
-{%extends 'shop/base.html'%}
-{%block body%}
- 
-<div class="container">
-    <h2 style="color:#631903">CURIO'S  Cabinet! </h2>
-     <div class="row">
-         {% for userdata in data %}
-         <div class="col-md-4 mt-4">
-             <div class="card" style="border:2px solid #6A2A17">
-                 <img src="{{userdata.image.url }}" alt="card-img-top" >
-                 <div class="card-body">
-                     <div id="nm{{ prod.id }}" class="card-title h1" style="color:#6A2A17">{{ userdata.desc }}</div>
-                     
-                    </div>
-             </div>
-           
-            </div>
-            {%endfor%}
-    </div>
-    </div>
+{% load static %}
 
-{%endblock%}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cabinet</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+    integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+    crossorigin="anonymous"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="{% static 'shop/style.css' %}">
+
+  <style>
+    .product-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .product-card-container {
+      flex: 1 0 30%;
+      max-width: 30%;
+    }
+
+    @media (max-width: 900px) {
+      .product-card-container {
+        flex: 1 0 45%;
+        max-width: 45%;
+      }
+    }
+
+    @media (max-width: 500px) {
+      .product-card-container {
+        flex: 1 0 100%;
+        max-width: 100%;
+      }
+    }
+
+    .card-title {
+      padding: 10px;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+  </style>
+
+</head>
+
+<body>
+  <!-- <div class="cover-container d-flex w-100 h-100 mx-auto flex-column"> -->
+
+
+
+  <div class="row">
+    <div class="col-md-12">
+      <nav class="navbar navbar-expand-lg ml-2">
+
+        <img src="/media/imgs/logo.png" height=80px width=auto alt="Logo">
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="bi bi-arrow-bar-down"></span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+            class="bi bi-arrow-bar-down" viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+              d="M1 3.5a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13a.5.5 0 0 1-.5-.5M8 6a.5.5 0 0 1 .5.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 0 1 .708-.708L7.5 12.293V6.5A.5.5 0 0 1 8 6" />
+          </svg>
+        </button>
+
+        <div class="ml-4 collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active ml-3">
+              <a class="nav-link" href="{%url 'home:home'%}">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="{%url 'shop:index'%}">Shop <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="{%url 'home:cabinet'%}">Curio Cabinet <span class="sr-only">(current)</span></a>
+            </li>
+
+
+
+            <li class="nav-item active">
+              <a class="nav-link" href="{%url 'home:collaboration'%}">Collaboration <span
+                  class="sr-only">(current)</span></a>
+            </li>
+
+          </ul>
+
+
+          <!-- <form class="form-inline" method="GET">
+                    <input id="form" class="form-control mr-sm-2" name="item_name" type="search" placeholder="Search your product">
+                    <button class="btn btn-success my-2 my-sm-0" type="submit">SEARCH</button>
+                </form>
+               -->
+
+          <button id='cart1' data-html='true' type="button" class="{{prod.title}} ml-2 mr-sm-2 my-2 btn btn-secondary"
+            data-container="body" data-toggle="popover" data-placement="bottom" data-content="Bottom popover">
+            Cart(0)
+          </button>
+          <a class='btn btn-secondary' href="{% url 'home:logout_page' %}" style="padding:3px">Logout</a>
+          <!-- </button> -->
+        </div>
+      </nav>
+    </div>
+  </div>
+
+
+ <section style="padding:50px">
+  <h2 style="color:#631903">CURIO'S Cabinet! </h2>
+  
+  {% if messages %}
+    {% for message in messages %}
+      <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}" role="alert">
+        {{ message }}
+      </div>
+    {% endfor %}
+  {% endif %}
+
+  <div class="row">
+    {% for userdata in data %}
+      <div class="col-12 col-sm-6 col-md-4 mb-4">
+        <div class="product-card" style="border:2px solid #6A2A17">
+          <img src="{{ userdata.image.url }}" class="card-img-top" height="300px" width="auto">
+          <div class="card-body">
+            <div class="card-title" style="color:#6A2A17; font-size: 1.2rem; word-wrap: break-word; overflow-wrap: break-word;">
+              {{ userdata.desc }}
+            </div>
+            <div class="card-title h1" style="color:#e4be83; font-size: 25px;">
+              Credit: {{ userdata.userid }}
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+
+
+
+</body>
+
+</html>

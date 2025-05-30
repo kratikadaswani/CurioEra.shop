@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Collaborate</title>
+  <style>
+    * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+html, body {
+  padding: 13px;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #5d3c1c, #927839, #eb731d, #e4be83) no-repeat center center fixed;
+  background-size: cover;
+  animation: bgMove 20s ease infinite;
+}
+
+/* Add gap to form fields */
+form p {
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+
+.btn {
+  margin-top: 8px;
+  padding: 10px;
+  border: none;
+  background-color: #342210;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.btn:hover {
+  background-color: #4f361c;
+}
+
+/* Product list spacing */
+ul {
+  margin-top: 12px;
+  margin-bottom: 16px;
+}
+
+li {
+  margin-bottom: 8px;
+}
+input{
+  background-color: transparent;
+  margin-bottom: 10px;
+   border-radius: 13px;
+   border: 3px solid #38160c;
+   padding: 7px;
+}
+#id_desc{
+   background-color: transparent;
+   border: 3px solid #38160c;
+   border-radius: 13px;
+   margin-bottom: 10px;
+}
+  </style>
+</head>
+
+<body>
+  <h1 style="color: #38160c; margin-bottom: 8px;">My Products</h1>
+{% if products %}
+  <ul>
+    {% for p in products %}
+      <li>{{ p.title }} - {{ p.price }} 
+          <a href="?action=update&prod_id={{ p.id }}" class="btn">Edit</a>
+      </li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <p style="font-size: 18px; margin-left: 12px;">   No products yet!</p>
+{% endif %}
+<br>
+<hr> <br>
+
+<a href="?action=add" class="btn" >Add New Product</a>
+
+{% if form %}
+  <h2 style="margin-top: 14px; color:#e5c793 ;">{% if action == 'add' %}Add{% else %}Update{% endif %} Product</h3>
+  <form method="POST" enctype="multipart/form-data" >
+    {% csrf_token %}
+     <input type="hidden" name="form_type" value="add_prod">
+    {{ form.as_p }}
+    <button type="submit" class="btn">{% if action == 'add' %}Add{% else %}Update{% endif %} Product</button>
+  </form>
+{% endif %}
+
+</body>
+</html>
+

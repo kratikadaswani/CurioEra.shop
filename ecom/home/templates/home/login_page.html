@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,10 +19,10 @@
         .form-container {
             width: 350px;
             padding: 30px;
-            border: 1px solid #dee2e6;
+            border: 1px solid #000000;
             border-radius: 8px;
             background-color: #fff;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             text-align: center;
         }
 
@@ -70,6 +71,28 @@
         .form-container a:hover {
             text-decoration: underline;
         }
+
+        @media (max-width: 420px) {
+            .form-container {
+              width: 310px;
+              padding: 10px;
+            }
+            .form-container input[type="email"],
+            .form-container input[type="password"] {
+            width: 80%;
+        }
+        }
+          @media (max-width: 320px) {
+            .form-container {
+              width: 250px;
+              padding: 10px;
+            }
+            .form-container input[type="text"],
+            .form-container input[type="email"],
+            .form-container input[type="password"] {
+            width: 80%;
+            }
+        }
     </style>
 </head>
 
@@ -81,11 +104,11 @@
             <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
 
             {% if messages %}
-                <div class="alert alert-primary" role="alert">
-                    {% for message in messages %}
-                        {{ message }}
-                    {% endfor %}
-                </div>
+            <div class="alert alert-primary" role="alert">
+                {% for message in messages %}
+                {{ message }}
+                {% endfor %}
+            </div>
             {% endif %}
 
             <input type="email" id="inputEmail" name="email" placeholder="Email address" required autofocus>
@@ -100,9 +123,10 @@
 
             <button type="submit">Sign in</button>
 
-            
+
             <p>Not an existing Curio? <a href="{% url 'home:register' %}">Register</a></p>
         </form>
     </div>
 </body>
+
 </html>

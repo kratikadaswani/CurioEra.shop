@@ -1,0 +1,280 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collaboration</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+        integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.7.1.js"
+        integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{% static 'shop/style.css' %}">
+    
+    <style>
+        .product-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .product-card-container {
+            flex: 1 0 30%;
+            max-width: 30%;
+        }
+
+        @media (max-width: 900px) {
+            .product-card-container {
+                flex: 1 0 45%;
+                max-width: 45%;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .product-card-container {
+                flex: 1 0 100%;
+                max-width: 100%;
+            }
+        }
+
+        .product-card {
+            padding: 10px;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .community-wrapper {
+  max-width: 800px;
+  margin: 50px auto;
+  padding: 30px;
+  border: 2px solid #560808;
+  border-radius: 16px;
+  /* background: #ffffff; */
+  background: transparent;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+        .post-form {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 600px;
+  margin: 30px auto;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.input-field, .textarea-field, .file-input {
+  display: block;
+  width: 100%;
+  padding: 12px 14px;
+  margin-bottom: 15px;
+  border: 1px solid #080707;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: border-color 0.3s ease;
+}
+
+.input-field:focus, .textarea-field:focus {
+  border-color: #631903;
+  outline: none;
+}
+
+.textarea-field {
+  height: 120px;
+  resize: vertical;
+}
+
+.file-input {
+  padding: 8px;
+}
+
+.submit-btn {
+  background: #631903;
+  color: #fff;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.submit-btn:hover {
+  background: #6A2A17;
+}
+
+.community-feed {
+  max-width: 700px;
+  margin: 40px auto;
+}
+
+.post-card {
+  /* background: #4a1302b0; */
+  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+}
+
+.post-meta {
+  margin-bottom: 10px;
+  font-size: 20px;
+  color: #e5c793;
+}
+
+.post-text {
+  font-size: 18px;
+  color: #631903;
+  margin-bottom: 10px;
+  padding: 10px;
+border-radius: 10px;
+ overflow: hidden;
+}
+
+.post-image {
+  max-width: 100%;
+  margin-top: 10px;
+  border-radius: 8px;
+}
+
+    </style>
+
+</head>
+
+<body>
+    <!-- <div class="cover-container d-flex w-100 h-100 mx-auto flex-column"> -->
+
+
+
+    <div class="row">
+        <div class="col-md-12">
+            <nav class="navbar navbar-expand-lg ml-2">
+
+                <img src="/media/imgs/logo.png" height=80px width=auto alt="Logo">
+
+                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="bi bi-arrow-bar-down"></span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-bar-down" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M1 3.5a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13a.5.5 0 0 1-.5-.5M8 6a.5.5 0 0 1 .5.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 0 1 .708-.708L7.5 12.293V6.5A.5.5 0 0 1 8 6"/>
+</svg>
+                </button>
+
+                <div class="ml-4 collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active ml-3">
+                            <a class="nav-link" href="{%url 'home:home'%}">Home <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="{%url 'shop:index'%}">Shop <span
+                                    class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="{%url 'home:cabinet'%}">Curio Cabinet <span
+                                    class="sr-only">(current)</span></a>
+                        </li>
+
+
+
+                        <li class="nav-item active">
+                            <a class="nav-link" href="{%url 'home:collaboration'%}">Collaboration <span
+                                    class="sr-only">(current)</span></a>
+                        </li>
+
+                    </ul>
+
+
+                    <!-- <form class="form-inline" method="GET">
+                    <input id="form" class="form-control mr-sm-2" name="item_name" type="search" placeholder="Search your product">
+                    <button class="btn btn-success my-2 my-sm-0" type="submit">SEARCH</button>
+                </form>
+               -->
+
+                    <button id='cart1' data-html='true' type="button"
+                        class="{{prod.title}} ml-2 mr-sm-2 my-2 btn btn-secondary" data-container="body"
+                        data-toggle="popover" data-placement="bottom" data-content="Bottom popover">
+                        Cart(0)
+                    </button>
+                    <a class='btn btn-secondary' href="{% url 'home:logout_page' %}" style="padding:3px">Logout</a>
+                    <!-- </button> -->
+                </div>
+            </nav>
+        </div>
+    </div>
+
+
+    <section style="padding:50px">
+        <h2 style="color:#631903">Visit Curio's Collaborations!</h2>
+        <div class="row">
+            <!-- moved here -->
+            {% for prod in data %}
+            <div class="col-12 col-sm-6 col-md-4">
+                <div class="product-card" style="border:2px solid #6A2A17">
+                    <img src="{{prod.image.url}}" class="card-img-top" height=300px width=auto>
+                    <div class="card-body">
+
+                        <div style="color:#6A2A17; font-size: 30px;">{{prod.title}} (Brand: {{prod.brand_name}})</div>
+                        <p style="color:#e5c793; font-size: 1.2rem; margin-top: 4px;">{{prod.desc}}</p>
+                        <span class="card-text ml-2" style="color:#e5c793"><s>Rs. {{ prod.price }}</s></span>
+                        <span id="price{{ prod.id }}" class="card-text" style="font-size: 20px; color:#8d1919">
+                            Rs. {{prod.discounted_price }} </span>
+                    </div>
+                    <div style="text-align: center; margin-bottom: 4px;">
+                        <a class="btn-success mt-2" href="{{prod.link}}"
+                            style="background-color: #6A2A17; font-size: 20px; color:#e5c793; padding:9px">visit...</a>
+
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        
+    </section>
+    <hr>
+    <section >
+        <div class="community-wrapper">
+        <h1 style="text-align: center; color: #631903;">Let's have a Vintage trend talks!</h1>
+        <div class="post-form">
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="hidden" name="form_type" value="tweet">
+
+    <input type="text" name="username" placeholder="Your Name" required class="input-field">
+    <textarea name="comment" placeholder="Drop your thoughts..." required class="textarea-field"></textarea>
+    <input type="file" name="image" class="file-input" accept=".jpg/.png">
+    <button type="submit" class="submit-btn">Post</button>
+  </form>
+</div>
+
+<div class="community-feed">
+  {% for post in posts %}
+    <div class="post-card">
+      <p class="post-meta"><strong>{{ post.username }}</strong> — {{ post.created_at|date:"F d, Y H:i" }}</p>
+      <p class="post-text">{{ post.comment }}</p>
+      {% if post.image %}
+        <img src="{{ post.image.url }}" alt="Post Image" class="post-image">
+      {% endif %}
+      <p style="font-size: 20px; color:#631903;">- A happy customer - {{userid}}</p>
+    </div>
+  {% endfor %}
+</div>
+</div>
+
+    </section>
+
+
+</body>
+
+</html>

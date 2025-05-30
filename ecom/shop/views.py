@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
-from .models import Products,Order
+from .models import Products,Order,Users_Product
 from django.contrib.auth import authenticate,login,logout
+from django.core.mail import EmailMessage
+from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 import pdfkit
 from django.http import HttpResponse
@@ -8,27 +10,28 @@ from django.template import loader
 import io
 import json
 from datetime import datetime
-
+from django.core.mail import send_mail
 
 
 @login_required(login_url='home:login_page')
 
 def index(request):
-    # if request.user.is_anonymous:
-    #     return redirect('home:login_page')
-    print("User is authenticated:", request.user.is_authenticated)
     prod = Products.objects.all()
+    
+
+    products = list(prod) 
 
     item = request.GET.get('item_name')
     category = request.GET.get('category')
 
     if item and item != '':
-        prod = prod.filter(title__icontains=item)
+        products = [p for p in products if item.lower() in p.title.lower()]
 
     if category and category != '':
-        prod = prod.filter(category__iexact=category)
+        products = [p for p in products if p.category.lower() == category.lower()]
 
-    return render(request, 'shop/index.html', {'products': prod})
+    return render(request, 'shop/index.html', {'products':products})
+
 
 def logout_page(request):
     logout(request)
@@ -36,6 +39,14 @@ def logout_page(request):
 def details(request,id):
     prod=Products.objects.get(id=id)
     return render(request,'shop/details.html',{'product':prod})
+
+from django.shortcuts import render, redirect, get_object_or_404
+# from .models import Users_Product
+# from .forms import UserProductForm
+from django.contrib.auth.decorators import login_required
+
+
+
 
 def checkout(request):
     if request.method=="POST":
@@ -51,8 +62,26 @@ def checkout(request):
         order=Order(items=items,name=name,email=email, address=address,city=city,state=state,zipcode=zipcode,total=total)
         order.save()
         items_dict = json.loads(items)
-         
 
+        #numb of buyers
+        items_dict = json.loads(items)
+
+        # If it's a string, decode again
+        for item in items_dict:
+         if isinstance(item, dict):
+            product_id = item.get('id')
+            if product_id:
+                try:
+                    product = Products.objects.get(id=product_id)
+                    product.buyers_count += 1
+                    product.save()
+                except Products.DoesNotExist:
+                    pass
+        else:
+            print(f"Skipping invalid item: {item}")
+
+            
+        #pdf gen
         current_datetime = datetime.now().strftime('%B %d, %Y %I:%M %p')  # example: May 14, 2025 09:27 PM
 
         # Load template
@@ -71,11 +100,26 @@ def checkout(request):
         }
         # Generate PDF
         pdf=pdfkit.from_string(html,False,options)
+        email_subject = 'Order Confirmation - Curio’s Vintage Collection'
+        email_body = 'Thank you for your purchase! Your order has been placed successfully. Attached is your invoice.'
+
+        message = EmailMessage(
+            email_subject,
+            email_body,
+            'your_email@gmail.com',  # from email
+            [email],                 # to email
+        )
+
+        message.attach(f'Invoice_{order.id}.pdf', pdf, 'application/pdf')
+
+        message.send(fail_silently=False)
+
+
         response = HttpResponse(pdf,content_type='application/pdf')
         response['Content-Disposition'] = f'attachment; filename="Invoice_{order.id}.pdf"'
         
-
         return response
 
     return render(request,'shop/checkout.html')
+
 

@@ -15,7 +15,7 @@
         }
 
         .form-container {
-            border: 2px solid #333;
+            border: 2px solid #000000;
             padding: 30px;
             border-radius: 10px;
             background: #fff;
@@ -56,6 +56,29 @@
 
         .form-container a:hover {
             text-decoration: underline;
+        }
+        
+        @media (max-width: 420px) {
+            .form-container {
+              width: 310px;
+              padding: 10px;
+            }
+            .form-container input[type="text"],
+            .form-container input[type="email"],
+            .form-container input[type="password"] {
+            width: 80%;
+            }
+        }
+        @media (max-width: 330px) {
+            .form-container {
+              width: 250px;
+              padding: 10px;
+            }
+            .form-container input[type="text"],
+            .form-container input[type="email"],
+            .form-container input[type="password"] {
+            width: 80%;
+            }
         }
     </style>
 </head>
